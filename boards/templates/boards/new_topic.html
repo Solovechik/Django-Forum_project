@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Start a New Topic
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'boards/css/simplemde.min.css' %}">
+{% endblock stylesheet %}
+
+{% block navigation %}
+    <li class="breadcrumb-item"><a href="{% url 'index' %}">Boards</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
+    <li class="breadcrumb-item active">New topic</li>
+{% endblock %}
+
+{% block content %}
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% include 'boards/includes/form.html' %}
+        <button type="submit" class="btn btn-success">Post</button>
+    </form>
+{% endblock content %}
+
+{% block javascript %}
+    <script src="{% static 'boards/js/simplemde.min.js' %}"></script>
+    <script>let simpleMde = new SimpleMDE();</script>
+{% endblock javascript %}
